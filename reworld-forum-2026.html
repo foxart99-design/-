@@ -53,6 +53,16 @@ p{margin:0 0 14px;max-width:34em}
 .flow span{color:var(--mute);font-size:15.5px}
 .topics{margin:0;padding:0;list-style:none;display:grid;gap:12px}
 .topics li{padding:16px 18px;background:var(--wash);border-radius:12px;border-left:4px solid var(--leaf)}
+.film{display:flex;align-items:center;gap:16px;margin-top:26px;padding:14px;text-decoration:none;background:var(--forest);border-radius:14px;color:#fff;transition:transform .12s,box-shadow .15s}
+.film:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(13,42,28,.28)}
+.film-thumb{flex:0 0 120px;aspect-ratio:16/9;border-radius:9px;background:#000 url(korea-spirit-2026-poster.jpg) center/cover no-repeat;position:relative;overflow:hidden}
+.film-thumb::after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;font-size:20px;color:#fff;background:rgba(0,0,0,.34)}
+.film-body{flex:1 1 auto;min-width:0}
+.film-kicker{display:block;font:800 11px/1 Montserrat,sans-serif;letter-spacing:.18em;color:var(--mint);margin-bottom:7px}
+.film-body strong{display:block;font-size:18px;line-height:1.45;font-weight:700}
+.film-body em{display:block;font-style:normal;color:#c9e0d1;font-size:14.5px;margin-top:4px}
+.film-go{flex:0 0 auto;font:700 14px/1 Montserrat,"Noto Sans KR",sans-serif;color:#f2c94c;white-space:nowrap;padding-right:6px}
+@media (max-width:520px){.film{gap:12px}.film-thumb{flex:0 0 92px}.film-body strong{font-size:16px}.film-body em{font-size:13.5px}.film-go{display:none}}
 .reg{background:var(--forest);color:#fff;border-radius:16px;padding:32px 26px}
 .reg h2{color:#fff}
 .reg p{color:#dcebe0}
@@ -117,6 +127,15 @@ footer a{color:var(--leaf);font:700 15px Montserrat,sans-serif;text-decoration:n
 <li>COP31 결과와 국제탄소시장의 흐름</li>
 <li>자발적 탄소시장 특강: 실천 단계에 들어선 기후행동의 새로운 도전</li>
 </ul>
+<a class="film" href="korea-spirit-2026.html">
+<span class="film-thumb" aria-hidden="true"></span>
+<span class="film-body">
+<span class="film-kicker">FORUM SCREENING</span>
+<strong>「한국인의 우리의식」 상영</strong>
+<em>포럼 상영 영상 · 전체 화면으로 보기</em>
+</span>
+<span class="film-go">영상 재생 →</span>
+</a>
 </div></section>
 
 <section><div class="wrap">
