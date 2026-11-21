@@ -68,6 +68,36 @@ footer strong{display:block;color:#fff;font-family:"Noto Serif KR",serif;font-si
 .gallery figcaption{margin-top:9px;font-size:.82rem;line-height:1.4;color:#5b6580;text-align:center;letter-spacing:.01em}
 @media (max-width:640px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.gallery figure{padding:6px;border-radius:6px}.gallery figcaption{font-size:.74rem;margin-top:6px}}
 @media print{.gallery{grid-template-columns:repeat(3,1fr);gap:10px}.gallery figure{box-shadow:none;break-inside:avoid}}
+/* --- lightbox: full-ratio artwork viewer --- */
+.works li{cursor:zoom-in;border-radius:3px}
+.works li img{transition:filter .18s ease}
+.works li:hover img{filter:brightness(.9)}
+.works li:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.gallery figure{cursor:zoom-in}
+.gallery figure:hover img{filter:brightness(.93)}
+#lb{position:fixed;inset:0;z-index:9999;display:none;background:rgba(8,12,24,.95);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#fff;overscroll-behavior:contain}
+#lb.on{display:grid;grid-template-rows:minmax(0,1fr) auto;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+#lb-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:0;padding:8px}
+#lb-img{display:block;object-fit:contain;max-width:92vw;max-height:78vh;width:auto;height:auto;background:#101728;box-shadow:0 26px 70px -30px rgba(0,0,0,.9)}
+#lb-x{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:calc(16px + env(safe-area-inset-right,0px));z-index:3;width:44px;height:44px;padding:0;border:1px solid rgba(255,255,255,.35);border-radius:99px;background:rgba(12,18,34,.6);color:#fff;font:400 26px/1 "Noto Sans KR",sans-serif;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#lb-x:hover{background:#fff;color:#0f1f4a}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);z-index:3;width:52px;height:52px;padding:0 0 5px;border:1px solid rgba(255,255,255,.3);border-radius:99px;background:rgba(12,18,34,.55);color:#fff;font:400 30px/1 "Noto Serif KR",serif;display:flex;align-items:center;justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent}
+#lb-prev{left:8px}#lb-next{right:8px}
+#lb-prev:hover,#lb-next:hover{background:#fff;color:#0f1f4a}
+#lb-prev[disabled],#lb-next[disabled]{opacity:.22;cursor:default}
+#lb-cap{text-align:center;padding:12px 76px 20px;line-height:1.5}
+#lb-name{display:block;font-family:"Noto Serif KR",serif;font-size:1.12rem;font-weight:700;color:#fff}
+#lb-meta{margin-top:5px;display:flex;flex-wrap:wrap;gap:3px 14px;justify-content:center;align-items:center;font-size:.8rem;color:#9aa6c8;letter-spacing:.05em}
+#lb-group{color:#d4b25a;font-weight:500;text-transform:uppercase}
+#lb-idx{font-variant-numeric:tabular-nums}
+@media (max-width:640px){
+#lb-prev,#lb-next{width:44px;height:44px;font-size:26px}
+#lb-prev{left:2px}#lb-next{right:2px}
+#lb-cap{padding:10px 60px 18px}
+#lb-name{font-size:1rem}
+#lb-x{top:calc(8px + env(safe-area-inset-top,0px));right:calc(10px + env(safe-area-inset-right,0px));width:40px;height:40px;font-size:23px}
+}
+@media (prefers-reduced-motion:no-preference){#lb.on #lb-img{animation:lbin .18s ease-out}@keyframes lbin{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:none}}}
 </style>
 </head>
 <body>
@@ -205,6 +235,123 @@ await d.save({filename:"파리_전시탐방_세부일정표.pdf",data:u});
 }catch(e){}
 });
 }catch(e){}
+})();
+</script>
+
+<div id="lb" role="dialog" aria-modal="true" aria-hidden="true" aria-label="작품 크게 보기">
+<button id="lb-x" type="button" aria-label="닫기">×</button>
+<div id="lb-stage">
+<button id="lb-prev" type="button" aria-label="이전 작품">‹</button>
+<img id="lb-img" alt="">
+<button id="lb-next" type="button" aria-label="다음 작품">›</button>
+</div>
+<div id="lb-cap"><strong id="lb-name"></strong><div id="lb-meta"><span id="lb-group"></span><span id="lb-idx"></span></div></div>
+</div>
+<script>
+(function(){
+var lb=document.getElementById("lb"),im=document.getElementById("lb-img"),capName=document.getElementById("lb-name"),capGrp=document.getElementById("lb-group"),capIdx=document.getElementById("lb-idx"),btnP=document.getElementById("lb-prev"),btnN=document.getElementById("lb-next"),btnX=document.getElementById("lb-x"),stage=document.getElementById("lb-stage");
+if(!lb||!im||!stage)return;
+var SETS={works:[],stay:[]},curSet="works",curIdx=0,lastFocus=null,open=false;
+function isEn(){return document.documentElement.lang==="en";}
+function gl(k,e){return '<span lang="ko">'+k+'</span><span lang="en">'+e+'</span>';}
+function txt(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML;}
+function setup(){
+var UL=document.querySelectorAll(".works"),i,j,k;
+for(i=0;i<UL.length;i++){
+var panel=UL[i].closest?UL[i].closest(".panel"):null;
+var kor=!!(panel&&panel.classList.contains("kor"));
+var g=kor?gl("한국 · 폭스아트","KOREA · FOXART"):gl("프랑스 · 에콜 드 데생 클라시크","FRANCE · ÉCOLE DE DESSIN CLASSIQUE");
+var lis=UL[i].querySelectorAll("li");
+for(j=0;j<lis.length;j++){
+(function(li){
+var img=li.querySelector("img");if(!img)return;
+var sp=li.querySelector("span"),nm=sp?sp.textContent.trim():(img.getAttribute("alt")||"");
+SETS.works.push({img:img,name:nm,alt:img.getAttribute("alt")||nm,grp:g});
+var idx=SETS.works.length-1;
+li.setAttribute("tabindex","0");li.setAttribute("role","button");
+li.setAttribute("aria-label",nm+" — 크게 보기 / View larger");
+li.addEventListener("click",function(){openAt("works",idx);});
+li.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault();openAt("works",idx);}});
+})(lis[j]);
+}
+}
+var FG=document.querySelectorAll(".gallery figure");
+for(k=0;k<FG.length;k++){
+(function(fg){
+var img=fg.querySelector("img");if(!img)return;
+var fc=fg.querySelector("figcaption");
+SETS.stay.push({img:img,name:fc?fc.innerHTML:"",html:true,alt:fc?fc.textContent.trim():(img.getAttribute("alt")||""),grp:gl("숙소 사진 · 리샤르 르누아르 아파트","ACCOMMODATION · RICHARD-LENOIR APARTMENT")});
+var idx=SETS.stay.length-1;
+fg.setAttribute("tabindex","0");fg.setAttribute("role","button");
+fg.setAttribute("aria-label",(fc?fc.textContent.trim():"")+" — 크게 보기 / View larger");
+fg.addEventListener("click",function(){openAt("stay",idx);});
+fg.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault();openAt("stay",idx);}});
+})(FG[k]);
+}
+}
+function labels(){
+var en=isEn();
+lb.setAttribute("aria-label",en?"Artwork viewer":"작품 크게 보기");
+btnX.setAttribute("aria-label",en?"Close":"닫기");
+btnP.setAttribute("aria-label",en?"Previous":"이전 작품");
+btnN.setAttribute("aria-label",en?"Next":"다음 작품");
+}
+function render(){
+var arr=SETS[curSet],it=arr[curIdx],en=isEn();
+im.src=it.img.currentSrc||it.img.src;
+im.alt=it.alt;
+if(it.html){capName.innerHTML=it.name;}else{capName.textContent=it.name;}
+capGrp.innerHTML=it.grp;
+capIdx.textContent=(curIdx+1)+" / "+arr.length;
+btnP.disabled=curIdx<=0;
+btnN.disabled=curIdx>=arr.length-1;
+labels();
+}
+function openAt(set,idx){
+lastFocus=document.activeElement;
+curSet=set;curIdx=idx;
+render();
+lb.classList.add("on");lb.setAttribute("aria-hidden","false");
+document.documentElement.style.overflow="hidden";document.body.style.overflow="hidden";
+open=true;
+try{btnX.focus({preventScroll:true});}catch(e){btnX.focus();}
+}
+function close(){
+lb.classList.remove("on");lb.setAttribute("aria-hidden","true");
+document.documentElement.style.overflow="";document.body.style.overflow="";
+open=false;im.removeAttribute("src");
+try{if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});}catch(e){}
+}
+function go(d){
+var arr=SETS[curSet],n=curIdx+d;
+if(n<0||n>=arr.length)return;
+curIdx=n;render();
+}
+btnX.addEventListener("click",close);
+btnP.addEventListener("click",function(e){e.stopPropagation();go(-1);});
+btnN.addEventListener("click",function(e){e.stopPropagation();go(1);});
+lb.addEventListener("click",function(e){
+var t=e.target;
+if(t===lb||t===stage)close();
+});
+document.addEventListener("keydown",function(e){
+if(!open)return;
+if(e.key==="Escape"||e.key==="Esc"){e.preventDefault();close();}
+else if(e.key==="ArrowLeft"){e.preventDefault();go(-1);}
+else if(e.key==="ArrowRight"){e.preventDefault();go(1);}
+});
+var sx=0,sy=0,sw=false;
+stage.addEventListener("touchstart",function(e){if(e.touches.length!==1)return;sw=true;sx=e.touches[0].clientX;sy=e.touches[0].clientY;},{passive:true});
+stage.addEventListener("touchend",function(e){
+if(!sw)return;sw=false;
+var t=e.changedTouches&&e.changedTouches[0];if(!t)return;
+var dx=t.clientX-sx,dy=t.clientY-sy;
+if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.4){go(dx<0?1:-1);}
+},{passive:true});
+var koR=document.getElementById("lang-ko"),enR=document.getElementById("lang-en");
+if(koR)koR.addEventListener("change",function(){if(open)render();});
+if(enR)enR.addEventListener("change",function(){if(open)render();});
+setup();
 })();
 </script>
 </body>
