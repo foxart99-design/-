@@ -57,12 +57,14 @@
   .sub{margin:0;color:var(--mute);font-size:14.5px;font-weight:300}
   .stage{
     background:#000;border-radius:16px;overflow:hidden;
-    box-shadow:0 18px 50px rgba(0,0,0,.45), 0 0 0 1px rgba(185,217,194,.14);
+    padding:8px;
+    border:1.5px solid rgba(242,201,76,.45);
+    box-shadow:0 24px 60px rgba(0,0,0,.65), inset 0 0 0 1px rgba(0,0,0,.65), 0 0 0 1px rgba(0,0,0,.35);
     line-height:0;
   }
   video{
     display:block;width:100%;height:auto;max-height:78vh;
-    background:#000;object-fit:contain;
+    background:#000;object-fit:contain;border-radius:9px;
   }
   .actions{
     display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
@@ -86,7 +88,7 @@
   footer{margin-top:34px;text-align:center;color:#7f9a88;font-size:12.5px}
   @media (max-width:520px){
     body{padding-left:12px;padding-right:12px}
-    .stage{border-radius:12px}
+    .stage{border-radius:12px;padding:6px}
     .btn{padding:13px 18px;font-size:14.5px;flex:1 1 auto;justify-content:center}
   }
 </style>
