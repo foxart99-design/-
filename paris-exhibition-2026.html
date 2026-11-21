@@ -296,10 +296,22 @@ btnX.setAttribute("aria-label",en?"Close":"닫기");
 btnP.setAttribute("aria-label",en?"Previous":"이전 작품");
 btnN.setAttribute("aria-label",en?"Next":"다음 작품");
 }
+function fit(){
+var nw=im.naturalWidth||0,nh=im.naturalHeight||0;
+if(!nw||!nh)return;
+var cap=2;
+var maxW=Math.min(window.innerWidth*0.92,nw*cap);
+var maxH=Math.min(window.innerHeight*0.78,nh*cap);
+var sc=Math.min(maxW/nw,maxH/nh);
+im.style.width=Math.round(nw*sc)+"px";
+im.style.height=Math.round(nh*sc)+"px";
+}
 function render(){
 var arr=SETS[curSet],it=arr[curIdx],en=isEn();
+im.onload=fit;
 im.src=it.img.currentSrc||it.img.src;
 im.alt=it.alt;
+if(im.complete)fit();
 if(it.html){capName.innerHTML=it.name;}else{capName.textContent=it.name;}
 capGrp.innerHTML=it.grp;
 capIdx.textContent=(curIdx+1)+" / "+arr.length;
@@ -327,6 +339,7 @@ var arr=SETS[curSet],n=curIdx+d;
 if(n<0||n>=arr.length)return;
 curIdx=n;render();
 }
+window.addEventListener("resize",function(){if(open)fit();});
 btnX.addEventListener("click",close);
 btnP.addEventListener("click",function(e){e.stopPropagation();go(-1);});
 btnN.addEventListener("click",function(e){e.stopPropagation();go(1);});
