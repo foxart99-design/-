@@ -68,6 +68,14 @@ footer strong{display:block;color:#fff;font-family:"Noto Serif KR",serif;font-si
 .gallery figcaption{margin-top:9px;font-size:.82rem;line-height:1.4;color:#5b6580;text-align:center;letter-spacing:.01em}
 @media (max-width:640px){.gallery{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.gallery figure{padding:6px;border-radius:6px}.gallery figcaption{font-size:.74rem;margin-top:6px}}
 @media print{.gallery{grid-template-columns:repeat(3,1fr);gap:10px}.gallery figure{box-shadow:none;break-inside:avoid}}
+/* --- official poster --- */
+.poster{display:flex;justify-content:center;margin:4px 0 0}
+.poster figure{position:relative;margin:0;width:100%;max-width:470px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:12px;cursor:zoom-in;box-shadow:0 1px 2px rgba(15,31,74,.05),0 20px 44px -30px rgba(15,31,74,.6)}
+.poster figure::before{content:"";position:absolute;inset:5px;border:1px solid color-mix(in srgb,var(--gold) 60%,transparent);border-radius:5px;pointer-events:none}
+.poster img{display:block;width:100%;height:auto;border-radius:2px;background:#eef1f7}
+.poster figure:hover img{filter:brightness(.95)}
+.poster figcaption{margin-top:10px;font-size:.82rem;line-height:1.4;color:var(--mute);text-align:center;letter-spacing:.01em}
+@media (max-width:560px){.poster figure{padding:10px;max-width:100%}.poster figure::before{inset:4px}.poster figcaption{font-size:.76rem;margin-top:8px}}
 /* --- lightbox: full-ratio artwork viewer --- */
 .works li{cursor:zoom-in;border-radius:3px}
 .works li img{transition:filter .18s ease}
@@ -85,6 +93,7 @@ footer strong{display:block;color:#fff;font-family:"Noto Serif KR",serif;font-si
 #lb-prev{left:8px}#lb-next{right:8px}
 #lb-prev:hover,#lb-next:hover{background:#fff;color:#0f1f4a}
 #lb-prev[disabled],#lb-next[disabled]{opacity:.22;cursor:default}
+#lb.single #lb-prev,#lb.single #lb-next,#lb.single #lb-idx{display:none}
 #lb-cap{text-align:center;padding:12px 76px 20px;line-height:1.5}
 #lb-name{display:block;font-family:"Noto Serif KR",serif;font-size:1.12rem;font-weight:700;color:#fff}
 #lb-meta{margin-top:5px;display:flex;flex-wrap:wrap;gap:3px 14px;justify-content:center;align-items:center;font-size:.8rem;color:#9aa6c8;letter-spacing:.05em}
@@ -122,6 +131,17 @@ footer strong{display:block;color:#fff;font-family:"Noto Serif KR",serif;font-si
 <div class="fact"><b><span lang="ko">장소</span><span lang="en">Venue</span></b><strong><span lang="ko">Galerie, 파리 3구</span><span lang="en">Galerie, Paris 3rd arr.</span></strong><small>5 Rue Sainte-Anastase, 75003 Paris<br>메트로 Saint-Sébastien Froissart · Rambuteau · Bréguet-Sabin</small></div>
 </div>
 <p style="margin-top:20px"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=5+Rue+Sainte-Anastase+75003+Paris" target="_blank" rel="noopener"><span lang="ko">구글 지도에서 길 찾기</span><span lang="en">Open in Google Maps</span></a><a class="btn alt" href="https://www.youtube.com/watch?v=QVaNiGgve54" target="_blank" rel="noopener"><span lang="ko">2024 파리 전시 영상 보기</span><span lang="en">Watch the 2024 Paris exhibition video</span></a></p>
+
+<section id="poster">
+<h2><span lang="ko">공식 포스터</span><span lang="en">Official Poster</span></h2>
+<p class="lead"><span lang="ko">한불수교 140주년 기념 미술교류 전시회 공식 포스터입니다. 포스터를 누르면 크게 볼 수 있습니다.</span><span lang="en">The official poster of the Korea–France 140th Anniversary Art Exchange Exhibition. Tap the poster to view it larger.</span></p>
+<div class="poster">
+<figure>
+<img src="paris-poster-2026.jpg" srcset="paris-poster-2026-640.jpg 640w, paris-poster-2026.jpg 1200w" sizes="(max-width:560px) 86vw, 446px" width="1200" height="1696" loading="lazy" decoding="async" alt="파리 전시 공식 포스터 — Art Exchange Exhibition Korea × France, 2026년 12월 1–2일, 갈르리 조제프 파리 3구">
+<figcaption><span lang="ko">공식 포스터 · 2026.12.1–2 · 갈르리 조제프, 파리 3구</span><span lang="en">Official poster · Dec 1–2, 2026 · Galerie Joseph, Paris 3e</span></figcaption>
+</figure>
+</div>
+</section>
 
 <section id="artists">
 <h2><span lang="ko">참여 작가</span><span lang="en">Artists</span></h2>
@@ -293,6 +313,18 @@ fg.addEventListener("click",function(){openAt("stay",idx);});
 fg.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault();openAt("stay",idx);}});
 })(FG[k]);
 }
+var PF=document.querySelector(".poster figure");
+if(PF){
+var pim=PF.querySelector("img"),pfc=PF.querySelector("figcaption");
+if(pim){
+SETS.poster=[{src:"paris-poster-2026.jpg",img:pim,name:pfc?pfc.innerHTML:(pim.getAttribute("alt")||""),html:!!pfc,fc:pfc,alt:pim.getAttribute("alt")||"",grp:gl("한불수교 140주년 기념 미술교류 전시회","KOREA–FRANCE ART EXCHANGE EXHIBITION · 2026")}];
+STAYBTN.push({el:PF,fc:pfc});
+PF.setAttribute("tabindex","0");PF.setAttribute("role","button");
+PF.setAttribute("aria-label",(pfc?visText(pfc):"")+" — 크게 보기 / View larger");
+PF.addEventListener("click",function(){openAt("poster",0);});
+PF.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault();openAt("poster",0);}});
+}
+}
 }
 function labels(){
 var en=isEn();
@@ -314,7 +346,7 @@ im.style.height=Math.round(nh*sc)+"px";
 function render(){
 var arr=SETS[curSet],it=arr[curIdx],en=isEn();
 im.onload=fit;
-im.src=it.img.currentSrc||it.img.src;
+im.src=it.src||it.img.currentSrc||it.img.src;
 im.alt=it.fc?visText(it.fc):it.alt;
 if(im.complete)fit();
 if(it.html){capName.innerHTML=it.name;}else{capName.textContent=it.name;}
@@ -322,6 +354,7 @@ capGrp.innerHTML=it.grp;
 capIdx.textContent=(curIdx+1)+" / "+arr.length;
 btnP.disabled=curIdx<=0;
 btnN.disabled=curIdx>=arr.length-1;
+lb.classList[arr.length<2?"add":"remove"]("single");
 labels();
 }
 function openAt(set,idx){
