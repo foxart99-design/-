@@ -251,9 +251,13 @@ await d.save({filename:"파리_전시탐방_세부일정표.pdf",data:u});
 (function(){
 var lb=document.getElementById("lb"),im=document.getElementById("lb-img"),capName=document.getElementById("lb-name"),capGrp=document.getElementById("lb-group"),capIdx=document.getElementById("lb-idx"),btnP=document.getElementById("lb-prev"),btnN=document.getElementById("lb-next"),btnX=document.getElementById("lb-x"),stage=document.getElementById("lb-stage");
 if(!lb||!im||!stage)return;
-var SETS={works:[],stay:[]},curSet="works",curIdx=0,lastFocus=null,open=false;
+var SETS={works:[],stay:[]},STAYBTN=[],curSet="works",curIdx=0,lastFocus=null,open=false;
 function isEn(){return document.documentElement.lang==="en";}
 function gl(k,e){return '<span lang="ko">'+k+'</span><span lang="en">'+e+'</span>';}
+function visText(node){
+var l=isEn()?"en":"ko",sp=node.querySelector('[lang="'+l+'"]');
+return (sp?sp.textContent:node.textContent).trim();
+}
 function txt(t){var d=document.createElement("div");d.textContent=t;return d.innerHTML;}
 function setup(){
 var UL=document.querySelectorAll(".works"),i,j,k;
@@ -280,10 +284,11 @@ for(k=0;k<FG.length;k++){
 (function(fg){
 var img=fg.querySelector("img");if(!img)return;
 var fc=fg.querySelector("figcaption");
-SETS.stay.push({img:img,name:fc?fc.innerHTML:"",html:true,alt:fc?fc.textContent.trim():(img.getAttribute("alt")||""),grp:gl("숙소 사진 · 리샤르 르누아르 아파트","ACCOMMODATION · RICHARD-LENOIR APARTMENT")});
+SETS.stay.push({img:img,fc:fc,name:fc?fc.innerHTML:"",html:true,grp:gl("숙소 사진 · 리샤르 르누아르 아파트","ACCOMMODATION · RICHARD-LENOIR APARTMENT")});
 var idx=SETS.stay.length-1;
+STAYBTN.push({el:fg,fc:fc});
 fg.setAttribute("tabindex","0");fg.setAttribute("role","button");
-fg.setAttribute("aria-label",(fc?fc.textContent.trim():"")+" — 크게 보기 / View larger");
+fg.setAttribute("aria-label",(fc?visText(fc):"")+" — 크게 보기 / View larger");
 fg.addEventListener("click",function(){openAt("stay",idx);});
 fg.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "||e.key==="Spacebar"){e.preventDefault();openAt("stay",idx);}});
 })(FG[k]);
@@ -310,7 +315,7 @@ function render(){
 var arr=SETS[curSet],it=arr[curIdx],en=isEn();
 im.onload=fit;
 im.src=it.img.currentSrc||it.img.src;
-im.alt=it.alt;
+im.alt=it.fc?visText(it.fc):it.alt;
 if(im.complete)fit();
 if(it.html){capName.innerHTML=it.name;}else{capName.textContent=it.name;}
 capGrp.innerHTML=it.grp;
@@ -361,9 +366,14 @@ var t=e.changedTouches&&e.changedTouches[0];if(!t)return;
 var dx=t.clientX-sx,dy=t.clientY-sy;
 if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.4){go(dx<0?1:-1);}
 },{passive:true});
+function relabel(){
+for(var i=0;i<STAYBTN.length;i++){var o=STAYBTN[i];
+o.el.setAttribute("aria-label",(o.fc?visText(o.fc):"")+" — 크게 보기 / View larger");}
+if(open)render();
+}
 var koR=document.getElementById("lang-ko"),enR=document.getElementById("lang-en");
-if(koR)koR.addEventListener("change",function(){if(open)render();});
-if(enR)enR.addEventListener("change",function(){if(open)render();});
+if(koR)koR.addEventListener("change",relabel);
+if(enR)enR.addEventListener("change",relabel);
 setup();
 })();
 </script>
