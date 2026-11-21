@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>폭스아트 · 페이지 모음</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0f1f4a; --gold:#a8872e; --bg:#f4f6fb; --card:#ffffff;
+    --ink:#16203a; --mute:#5b6580; --line:#d9deea;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:'Noto Sans KR',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding:0 20px calc(48px + env(safe-area-inset-bottom,0px));
+    padding-top:env(safe-area-inset-top,0px);
+  }
+  .wrap{max-width:720px;margin:0 auto}
+  header{padding:48px 0 28px;text-align:center}
+  .brand{
+    display:inline-block;font-size:12px;letter-spacing:.22em;color:var(--gold);
+    border:1px solid rgba(168,135,46,.45);border-radius:999px;padding:6px 14px;margin-bottom:18px;
+  }
+  h1{
+    font-family:'Noto Serif KR',serif;font-weight:800;font-size:26px;line-height:1.45;
+    margin:0 0 10px;color:var(--navy);letter-spacing:-.01em;
+  }
+  .sub{margin:0;color:var(--mute);font-size:14px;line-height:1.7}
+  .list{margin-top:32px;display:grid;gap:14px}
+  a.card{
+    display:block;text-decoration:none;color:inherit;background:var(--card);
+    border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;
+    box-shadow:0 1px 2px rgba(16,32,64,.04);transition:border-color .15s,transform .15s,box-shadow .15s;
+  }
+  a.card:hover,a.card:focus-visible{
+    border-color:rgba(168,135,46,.65);transform:translateY(-2px);
+    box-shadow:0 8px 24px rgba(16,32,64,.08);outline:none;
+  }
+  .kicker{font-size:11.5px;letter-spacing:.14em;color:var(--gold);font-weight:700;margin-bottom:8px}
+  .card h2{font-family:'Noto Serif KR',serif;font-size:18px;font-weight:600;margin:0 0 8px;line-height:1.5;color:var(--navy)}
+  .card p{margin:0;color:var(--mute);font-size:13.5px;line-height:1.65}
+  .go{margin-top:14px;font-size:13px;font-weight:700;color:var(--gold)}
+  footer{margin-top:36px;text-align:center;color:#8a93a8;font-size:12px;line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="brand">FOXART · 귀큰여우창작소</div>
+    <h1>폭스아트 페이지 모음</h1>
+    <p class="sub">아래 두 페이지에서 바로 확인하실 수 있습니다.</p>
+  </header>
+
+  <div class="list">
+    <a class="card" href="reworld-forum-2026.html">
+      <div class="kicker">2026 리월드 리더십 포럼</div>
+      <h2>2026 리월드 리더십 포럼 · SDX재단</h2>
+      <p>포럼 소개와 「한국인의 우리 의식」 영상 자료를 담은 페이지입니다.</p>
+      <div class="go">페이지 열기 →</div>
+    </a>
+
+    <a class="card" href="paris-exhibition-2026.html">
+      <div class="kicker">한불수교 140주년</div>
+      <h2>한불수교 140주년 기념 미술교류 전시회 (파리)</h2>
+      <p>FOXART × EDC Paris 전시 안내 · 일정 · 숙소 포함 상세 페이지입니다.</p>
+      <div class="go">페이지 열기 →</div>
+    </a>
+  </div>
+
+  <footer>
+    폭스아트 · 귀큰여우창작소<br>
+    문의는 채널로 연락 주세요.
+  </footer>
+</div>
+</body>
+</html>

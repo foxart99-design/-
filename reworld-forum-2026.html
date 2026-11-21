@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>2026 리월드 리더십 포럼 | SDX재단</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#143a28;--forest2:#0d2a1c;--leaf:#2e7d4f;--mint:#b9d9c2;--paper:#ffffff;--wash:#eef3ee;--ink:#17231c;--mute:#5a6a60;--line:#d6e0d8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0f1a14;--wash:#16251c;--ink:#e8f0ea;--mute:#9db1a3;--line:#27382d;--leaf:#6fc08c}}
+:root[data-theme="dark"]{--paper:#0f1a14;--wash:#16251c;--ink:#e8f0ea;--mute:#9db1a3;--line:#27382d;--leaf:#6fc08c}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.75 "Noto Sans KR",system-ui,sans-serif;word-break:keep-all}
+.wrap{max-width:860px;margin:0 auto;padding:0 22px}
+.hero{position:relative;background:var(--forest);color:#fff;overflow:hidden;padding:56px 0 48px;margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(56px + env(safe-area-inset-top,0px))}
+.hero svg{position:absolute;right:-18%;top:-6%;width:88%;max-width:760px;opacity:.9;pointer-events:none}
+.hero svg g{transform-origin:400px 400px;animation:spin 240s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero .wrap{position:relative}
+.org{font:800 15px/1 Montserrat,sans-serif;letter-spacing:.02em;color:var(--mint)}
+.mark{font:800 clamp(52px,14vw,96px)/.92 Montserrat,sans-serif;letter-spacing:-.03em;margin:34px 0 8px}
+.mark span{display:block}
+.sub{font:500 14px/1 Montserrat,sans-serif;letter-spacing:.42em;color:var(--mint);margin:0 0 38px}
+.tag{display:inline-block;border:1px solid var(--mint);color:var(--mint);padding:5px 12px;border-radius:99px;font-size:13px;margin-bottom:18px}
+h1{font:700 clamp(26px,6vw,40px)/1.3 "Noto Sans KR",sans-serif;margin:0 0 6px;letter-spacing:-.01em}
+.when{font:300 19px/1.6 "Noto Sans KR",sans-serif;color:var(--mint);margin:0}
+.dday{margin-top:30px;display:inline-flex;align-items:baseline;gap:10px;background:rgba(255,255,255,.08);border-radius:10px;padding:10px 16px}
+.dday b{font:800 30px/1 Montserrat,sans-serif}
+.dday span{font-size:14px;color:var(--mint)}
+section{padding:54px 0;border-bottom:1px solid var(--line)}
+h2{font:700 26px/1.3 "Noto Sans KR",sans-serif;margin:0 0 22px;color:var(--forest)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) h2{color:var(--mint)}}
+:root[data-theme="dark"] h2{color:var(--mint)}
+h2 small{font:500 15px/1 "Noto Sans KR",sans-serif;color:var(--leaf);margin-left:10px}
+p{margin:0 0 14px;max-width:34em}
+.sign{text-align:right;max-width:none;color:var(--mute)}
+.sign b{font-size:21px;color:var(--ink);margin-left:8px;letter-spacing:.12em}
+.info{background:var(--wash);border-radius:14px;padding:8px 26px}
+.row{display:grid;grid-template-columns:76px 1fr;gap:6px 20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}
+.row dt{color:var(--leaf);font-weight:700;font-size:15px}
+.row dd{margin:0}
+.row strong{display:block;font-size:19px;line-height:1.5}
+.row span{color:var(--mute);font-size:15.5px}
+.flow{list-style:none;margin:0 0 30px;padding:0 0 0 22px;border-left:2px solid var(--leaf)}
+.flow li{position:relative;padding:0 0 22px 18px}
+.flow li::before{content:"";position:absolute;left:-30px;top:9px;width:14px;height:14px;border-radius:50%;background:var(--paper);border:3px solid var(--leaf)}
+.flow time{font:700 16px/1.4 Montserrat,"Noto Sans KR",sans-serif;color:var(--leaf);display:block}
+.flow strong{display:block}
+.flow span{color:var(--mute);font-size:15.5px}
+.topics{margin:0;padding:0;list-style:none;display:grid;gap:12px}
+.topics li{padding:16px 18px;background:var(--wash);border-radius:12px;border-left:4px solid var(--leaf)}
+.reg{background:var(--forest);color:#fff;border-radius:16px;padding:32px 26px}
+.reg h2{color:#fff}
+.reg p{color:#dcebe0}
+.reg .deadline{font:700 22px/1.4 "Noto Sans KR",sans-serif;color:#fff;margin-bottom:6px}
+.note{background:rgba(255,255,255,.1);border-radius:10px;padding:14px 16px;margin:18px 0 24px;max-width:none}
+.btn{display:inline-block;background:#fff;color:var(--forest);font-weight:700;text-decoration:none;padding:15px 26px;border-radius:10px}
+.btn:hover{background:var(--mint)}
+.btn:focus-visible,a:focus-visible{outline:3px solid #ffd166;outline-offset:3px}
+.addr{font-size:19px;font-weight:500;margin-bottom:4px}
+footer{padding:34px 0 44px;color:var(--mute);font-size:14px}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer a{color:var(--leaf);font:700 15px Montserrat,sans-serif;text-decoration:none}
+.gold,.pt{font-family:Montserrat,"Noto Sans KR",sans-serif;font-weight:800}
+.gold{color:#f2c94c}
+.pt{color:var(--leaf)}
+@media (max-width:520px){.row{grid-template-columns:1fr}.hero svg{right:-45%;width:130%}}
+@media (prefers-reduced-motion:reduce){.hero svg g{animation:none}}
+</style>
+</head>
+<body>
+<header class="hero">
+<svg viewBox="0 0 800 800" aria-hidden="true"><g id="dots" fill="#2f6b49"></g></svg>
+<div class="wrap">
+<div class="org">SDX재단 · SDX FOUNDATION</div>
+<div class="mark" aria-label="ReWorld Forum"><span>RE</span><span>WORLD</span><span>FORUM</span></div>
+<p class="sub">LEADERSHIP</p>
+<span class="tag">초청 전용 · Invitation Only</span>
+<h1>2026 리월드 리더십 포럼</h1>
+<p class="when"><b class="gold">2026년 12월 28일(월) 오후 2시</b> · 판교스타트업캠퍼스</p>
+<div class="dday" id="dday" hidden><b id="dnum">0</b><span>일 남았습니다</span></div>
+</div>
+</header>
+
+<main>
+<section><div class="wrap">
+<h2>초대의 말씀</h2>
+<p>SDX재단은 디지털 전환을 기반으로 지속가능한 발전을 추구하며, 기후행동과 사회적 가치 창조를 위한 활동을 이어 왔습니다.</p>
+<p>그동안 리월드포럼으로 이어 온 논의를, 올해는 초청제로 운영하는 리월드 리더십 포럼으로 이어가고자 합니다.</p>
+<p>이번 포럼에서는 한 해의 성과를 돌아보고, 각 위원회 위원 위촉과 함께 2027년 추진 방향을 공유합니다. 아울러 COP31과 자발적 탄소시장의 흐름도 함께 나누고자 합니다.</p>
+<p>귀한 걸음으로 자리를 빛내 주시기 바랍니다.</p>
+<p class="sign">SDX재단 이사장 <b>전하진</b></p>
+</div></section>
+
+<section><div class="wrap">
+<h2>행사 안내</h2>
+<dl class="info" style="margin:0">
+<div class="row"><dt>주제</dt><dd><strong class="pt">성숙사회로의 전환, 생각에서 실천으로</strong><span>COP31, 기후행동에 대한 새로운 도전</span></dd></div>
+<div class="row"><dt>일시</dt><dd><strong class="pt">2026년 12월 28일(월) 오후 2시</strong><span>식전행사 오후 1시 30분 · 합창단 기후행동 공연</span></dd></div>
+<div class="row"><dt>장소</dt><dd><strong class="pt">판교스타트업캠퍼스 2층 다목적홀</strong><span>경기도 성남시 분당구 판교로289번길 20 (주차 가능)</span></dd></div>
+</dl>
+</div></section>
+
+<section><div class="wrap">
+<h2>프로그램</h2>
+<ol class="flow">
+<li><time>오후 1시 30분</time><strong>식전행사</strong><span>합창단 기후행동 공연</span></li>
+<li><time>오후 2시</time><strong>본 행사</strong><span>저녁까지 이어집니다.</span></li>
+</ol>
+<ul class="topics">
+<li>성숙 사회의 비전 공유: 인간과 자연, 공동체가 함께하는 지속가능한 번영</li>
+<li>새로 조직된 각 위원회의 활동 소개와 2027년 추진 방향</li>
+<li>COP31 결과와 국제탄소시장의 흐름</li>
+<li>자발적 탄소시장 특강: 실천 단계에 들어선 기후행동의 새로운 도전</li>
+</ul>
+</div></section>
+
+<section><div class="wrap">
+<h2>참석 등록</h2>
+<div class="reg">
+<p class="deadline">등록 기한 <span class="gold">2026년 12월 15일</span></p>
+<p>사전 등록해 주신 분들께는 사무국에서 프로그램 및 행사에 대한 개별 안내를 드립니다.</p>
+<p class="note"><b>등록할 때 <span class="gold">초청자</span>의 이름을 적어 주세요.</b> 이름이 있어야 등록이 가능합니다.</p>
+<a class="btn" href="https://forms.gle/AgSiR8pTGeDa7pg66" target="_blank" rel="noopener">참석자 사전 등록하기</a>
+</div>
+</div></section>
+
+<section style="border:0"><div class="wrap">
+<h2>오시는 길</h2>
+<p class="addr">판교스타트업캠퍼스 2층 다목적홀</p>
+<p style="color:var(--mute)">경기도 성남시 분당구 판교로289번길 20<br>주차가 가능합니다.</p>
+</div></section>
+</main>
+
+<footer><div class="wrap"><span>SDX재단</span><a href="https://sdxfoundation.org" target="_blank" rel="noopener">sdxfoundation.org</a></div></footer>
+
+<script>
+(function(){
+  var g=document.getElementById('dots'),h='',rings=17,i,j,n,r,a,s;
+  for(i=1;i<=rings;i++){
+    r=i*22; n=Math.round(i*7); s=1.6+i*0.55;
+    for(j=0;j<n;j++){
+      a=(j/n)*Math.PI*2+i*0.35;
+      var x=(400+r*Math.cos(a)).toFixed(1),y=(400+r*Math.sin(a)).toFixed(1),p=[];
+      for(var k=0;k<6;k++){var t=Math.PI/3*k+Math.PI/6;p.push((+x+s*Math.cos(t)).toFixed(1)+','+(+y+s*Math.sin(t)).toFixed(1));}
+      h+='<polygon points="'+p.join(' ')+'" opacity="'+(0.25+0.75*i/rings).toFixed(2)+'"/>';
+    }
+  }
+  g.innerHTML=h;
+  try{
+    var d=Math.ceil((new Date('2026-12-28T14:00:00+09:00')-new Date())/864e5);
+    if(d>0){document.getElementById('dnum').textContent=d;document.getElementById('dday').hidden=false;}
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
