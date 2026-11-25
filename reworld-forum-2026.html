@@ -35,8 +35,8 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.75 "Noto Sans KR",system-ui,sans-serif;word-break:keep-all}
 .wrap{max-width:860px;margin:0 auto;padding:0 22px}
 .hero{position:relative;background:var(--forest);color:#fff;overflow:hidden;padding:52px 0 46px;margin-top:calc(-1 * env(safe-area-inset-top,0px));padding-top:calc(52px + env(safe-area-inset-top,0px))}
-.hero svg{position:absolute;right:-18%;top:-6%;width:88%;max-width:760px;opacity:.9;pointer-events:none}
-.hero svg g{transform-origin:400px 400px;animation:spin 240s linear infinite}
+.hero .hexbg{position:absolute;right:-18%;top:-6%;width:88%;max-width:760px;opacity:.9;pointer-events:none}
+.hero .hexbg g{transform-origin:400px 400px;animation:spin 240s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 .hero .wrap{position:relative}
 .org-logo{display:block;height:38px;width:auto}
@@ -140,7 +140,7 @@ footer a{color:var(--leaf);font:700 15px Montserrat,sans-serif;text-decoration:n
 }
 @media (max-width:520px){
   .hero{padding:42px 0 40px;padding-top:calc(42px + env(safe-area-inset-top,0px))}
-  .hero svg{right:-52%;width:140%;opacity:.55}
+  .hero .hexbg{right:-52%;width:140%;opacity:.55}
   .hero-actions{gap:10px}
   .dday{padding:8px 13px;gap:8px}
   .dday b{font-size:26px}
@@ -163,12 +163,12 @@ footer a{color:var(--leaf);font:700 15px Montserrat,sans-serif;text-decoration:n
   .theme{padding-left:16px}
   .contact a{font-size:18px}
 }
-@media (prefers-reduced-motion:reduce){.hero svg g{animation:none}}
+@media (prefers-reduced-motion:reduce){.hero .hexbg g{animation:none}}
 </style>
 </head>
 <body>
 <header class="hero">
-<svg viewBox="0 0 800 800" aria-hidden="true"><g id="dots" fill="#2f6b49"></g></svg>
+<svg class="hexbg" viewBox="0 0 800 800" aria-hidden="true"><g id="dots" fill="#2f6b49"></g></svg>
 <div class="wrap">
 <img class="org-logo" src="sdx-logo.png" alt="SDX재단 · SDX FOUNDATION" width="544" height="228">
 <img class="mark-logo" src="reworld-logo-2026.png" alt="RE WORLD LEADERSHIP FORUM" width="842" height="542">
