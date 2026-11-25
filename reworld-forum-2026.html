@@ -75,7 +75,7 @@ p{margin:0 0 14px;max-width:34em}
 /* 프로그램 */
 .prog{margin-top:6px}
 .prog-note{margin:0 0 10px;text-align:right;font-size:13.5px;color:var(--mute)}
-.pr{display:grid;grid-template-columns:214px minmax(0,1fr) 250px;gap:0 16px;align-items:baseline;padding:15px 0;border-top:1px solid var(--line)}
+.pr{display:grid;grid-template-columns:204px minmax(0,1fr) 246px;gap:0 16px;align-items:baseline;padding:15px 0;border-top:1px solid var(--line)}
 .pr:first-of-type{border-top:1px solid var(--line)}
 .pr .ph{display:flex;align-items:baseline;gap:12px}
 .pr .st{flex:0 0 76px;font:700 15px/1.5 "Noto Sans KR",sans-serif;color:var(--leaf)}
@@ -85,11 +85,12 @@ p{margin:0 0 14px;max-width:34em}
 .pr .ti{margin:0;font:500 16.5px/1.55 "Noto Sans KR",sans-serif;color:var(--ink)}
 .pr .sp{margin:0;text-align:right;font-size:14.5px;line-height:1.55;color:var(--mute)}
 .pr .sp em{font-style:normal;color:var(--leaf);font-weight:500}
-.pr.part{align-items:center;background:var(--wash);padding:16px 16px 16px 16px;border-top:1px solid var(--line);margin-top:10px;border-radius:10px}
+.pr.part{grid-template-columns:204px minmax(0,1fr);align-items:center;background:var(--wash);padding:16px;border-top:1px solid var(--line);margin-top:10px;border-radius:10px}
+.pr.part .sp{display:none}
 .pr.part .st{color:var(--forest);font-size:19px}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pr.part .st{color:var(--mint)}}
 :root[data-theme="dark"] .pr.part .st{color:var(--mint)}
-.pr.part .ti{font-weight:700;font-size:18px;color:var(--forest)}
+.pr.part .ti{font-weight:700;font-size:17.5px;color:var(--forest)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pr.part .ti{color:var(--mint)}}
 :root[data-theme="dark"] .pr.part .ti{color:var(--mint)}
 .pr.sub .st{color:transparent}
@@ -133,13 +134,13 @@ footer a{color:var(--leaf);font:700 15px Montserrat,sans-serif;text-decoration:n
   .pr .tm{font-size:13.5px}
   .pr .ti{font-size:16px}
   .pr .sp{text-align:left;font-size:13.5px}
-  .pr.part{padding:14px;border-radius:8px}
+  .pr.part{grid-template-columns:1fr;padding:14px;border-radius:8px}
   .pr.part .st{font-size:17px}
   .pr.part .ti{font-size:16.5px}
 }
 @media (max-width:520px){
   .hero{padding:42px 0 40px;padding-top:calc(42px + env(safe-area-inset-top,0px))}
-  .hero svg{right:-45%;width:130%}
+  .hero svg{right:-52%;width:140%;opacity:.55}
   .hero-actions{gap:10px}
   .dday{padding:8px 13px;gap:8px}
   .dday b{font-size:26px}
